@@ -1,6 +1,9 @@
 from daily_log import DailyLog
 
 log = DailyLog()
-user_input = float(input("Enter the number of calories you ate: "))
-log.add_eaten(user_input)
+eaten_input = float(input("Enter the number of calories you ate: "))
+burned_input = float(input("Enter the number of calories you ate: "))
+log.add_eaten(eaten_input)
+log.add_burned(burned_input)
 print(log.calories_eaten)
+print(log.calories_burned)
