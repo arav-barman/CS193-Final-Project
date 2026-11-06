@@ -4,10 +4,12 @@ class DailyLog: #created the DailyLog class
         self.calories_burned = 0 #tracks the calories burned by the user
         self.goal = 0 #tracks the daily goal inputted by theh user 
 
-    def add_eaten(self, eaten):
+    def add_eaten(self, eaten: float):
         self.calories_eaten += eaten
 
-    def add_burned(self, burned):
+    def add_burned(self, burned: float):
         self.calories_burned += burned
-        
+
+    def add_goal(self, goal: float):
+        self.goal += goal 
     
