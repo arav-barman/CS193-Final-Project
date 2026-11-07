@@ -11,5 +11,13 @@ class DailyLog: #created the DailyLog class
         self.calories_burned += burned
 
     def add_goal(self, goal: float):
-        self.goal += goal 
+        self.goal = goal 
+
+    def get_net_calories(self):
+        net_calories = self.calories_eaten - self.calories_burned
+        return net_calories
+    
+    def goal_check(self):
+        return self.goal - self.get_net_calories()
+    
     
