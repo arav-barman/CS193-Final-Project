@@ -19,5 +19,5 @@ class DailyLog: #stores one day's calorie data within the DailyLog class
     
     def goal_check(self):
         return self.goal - self.get_net_calories()
-    
+
     
