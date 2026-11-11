@@ -8,10 +8,10 @@ def get_number(prompt):
           try:
                value = float(input(prompt))
           except ValueError:
-               print("Please input a number\n")
+               print("Please input a number.\n")
                continue  
           if value < 0:
-               print("Please enter a number 0 or greater\n")
+               print("Please enter a number 0 or greater.\n")
                continue
           return value 
 
@@ -22,7 +22,8 @@ while user_continues:
      print("3. Set daily goal")
      print("4. Check goal")
      print("5. Summary")
-     print("6. Quit\n")
+     print("6. Reset")
+     print("7. Quit\n")
 
      choice = input("Choose an option: ")
      if choice == "1":
@@ -35,13 +36,16 @@ while user_continues:
           goal_input = get_number("Enter your caloric goal: ")
           log.set_goal(goal_input)
      elif choice == "4":
-          net_calories = log.get_net_calories()
-          difference = log.goal_check()
-          print(f"Net Calories: {net_calories:.0f} ({log.calories_eaten:.0f} eaten - {log.calories_burned:.0f} burned)")
-          if difference >= 0:
-               print(f"You have met your goal! You are {difference:.0f} calories under your {log.goal:.0f} calorie goal.")
+          if log.goal == 0:
+               print("You have not set a goal yet.")
           else:
-               print(f"You did not meet your goal. You are {-1*difference:.0f} calories over your {log.goal:.0f} calorie goal.") 
+               net_calories = log.get_net_calories()
+               difference = log.goal_check()
+               print(f"Net Calories: {net_calories:.0f} ({log.calories_eaten:.0f} eaten - {log.calories_burned:.0f} burned)")
+               if difference >= 0:
+                    print(f"You have met your goal! You are {difference:.0f} calories under your {log.goal:.0f} calorie goal.")
+               else:
+                    print(f"You did not meet your goal. You are {-1*difference:.0f} calories over your {log.goal:.0f} calorie goal.") 
      elif choice == "5":
           net_calories = log.get_net_calories()
           difference = log.goal_check()
@@ -58,9 +62,16 @@ while user_continues:
                else:
                     print(f"Status: You are {-1*difference:.0f} calories over your goal")
      elif choice == "6":
+          confirm = input("Are you sure you want to reset all values? (Y/N): ")
+          if confirm.lower() == "y":
+               log.reset()
+               print("All values have been reset.")
+          else:
+               print("Reset cancelled.")
+     elif choice == "7":
           print("Goodbye!")
           user_continues = False
      else:
-          print("Invalid option. Please enter a number from 1 to 6.")
+          print("Invalid option. Please enter a number from 1 to 7.")
           
 
