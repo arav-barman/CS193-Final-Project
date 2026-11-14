@@ -21,4 +21,7 @@ class UserProfile:  # stores a user's personal information for calorie calculati
             return bmr + 5
         else:
             return bmr - 161
-
+        
+    def calculate_tdee(self): #estimated total calories burned in a day, including respective activity level
+        activity_multiplier = {1: 1.2, 2: 1.375, 3: 1.55, 4: 1.725, 5: 1.9}
+        return self.calculate_bmr() * activity_multiplier[self.activity_level]

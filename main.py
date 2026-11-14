@@ -89,6 +89,7 @@ while user_continues:
 
           profile = UserProfile(age=age, height_ft=height_ft, height_in=height_in, sex=sex, weight_lb= weight_lb, activity_level=activity)
           print(f"\nBMR (Calories Burned at Rest): {profile.calculate_bmr():.0f}")
+          print(f"TDEE (Estimated Calories to Maintain Weight): {profile.calculate_tdee():.0f}")
      elif choice == "7":
           confirm = input("Are you sure you want to reset all values? (Y/N): ")
           if confirm.lower() == "y":
