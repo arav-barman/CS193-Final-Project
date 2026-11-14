@@ -9,10 +9,10 @@ def get_number(prompt):
           try:
                value = float(input(prompt))
           except ValueError:
-               print("Please input a number.\n")
+               print("Please input a number\n")
                continue  
           if value < 0:
-               print("Please enter a number 0 or greater.\n")
+               print("Please enter a number 0 or greater\n")
                continue
           return value 
 
@@ -23,8 +23,9 @@ while user_continues:
      print("3. Set daily goal")
      print("4. Check goal")
      print("5. Summary")
-     print("6. Reset")
-     print("7. Quit\n")
+     print("6. Calorie Calculator")
+     print("7. Reset")
+     print("8. Quit\n")
 
      choice = input("Choose an option: ")
      if choice == "1":
@@ -63,16 +64,42 @@ while user_continues:
                else:
                     print(f"Status: You are {-1*difference:.0f} calories over your goal")
      elif choice == "6":
+          age = get_number("Enter your age in years: ")
+          height_ft = get_number("Enter your height (feet): ")
+          height_in = get_number("Enter your height (remaining in inches): ")
+          while height_in >= 12:
+               print("Inches must be less than 12.")
+               height_in = get_number("Enter your height (remaining in inches): ")
+          weight_lb = get_number("Enter your weight in pounds: ")
+          
+          sex = input("Enter your sex (male/female): ").strip().lower()
+          while sex != "male" and sex != "female":
+               print("Please enter male or female")
+               sex = input("Enter your sex (male/female):  ").strip().lower()
+
+          print("\nActivity level:")
+          print("1. Sedentary (little or no exercise)")
+          print("2. Lightly active (1-3 days/week)")
+          print("3. Moderately active (3-5 days/week)")
+          print("4. Very active (6-7 days/week)")
+          print("5. Extremely active (physical job + training)")
+          activity = int(get_number("Enter your activity level (1-5): "))
+          while activity < 1 or activity > 5:
+               activity = int(get_number("Enter your activity level (1-5): "))
+
+          profile = UserProfile(age=age, height_ft=height_ft, height_in=height_in, sex=sex, weight_lb= weight_lb, activity_level=activity)
+          print(f"\nBMR (Calories Burned at Rest): {profile.calculate_bmr():.0f}")
+     elif choice == "7":
           confirm = input("Are you sure you want to reset all values? (Y/N): ")
           if confirm.lower() == "y":
                log.reset()
                print("All values have been reset.")
           else:
                print("Reset cancelled.")
-     elif choice == "7":
+     elif choice == "8":
           print("Goodbye!")
           user_continues = False
      else:
-          print("Invalid option. Please enter a number from 1 to 7.")
+          print("Invalid option. Please enter a number from 1 to 8.")
           
 

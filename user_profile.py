@@ -1,6 +1,6 @@
 class UserProfile:  # stores a user's personal information for calorie calculations
-    def __init__(self, age, height_ft, height_in, gender, weight_lb, activity_level):
-        self.gender = gender
+    def __init__(self, age, height_ft, height_in, sex, weight_lb, activity_level):
+        self.sex = sex
         self.age = age
         self.weight_lb = weight_lb #in lbs
         self.height_ft = height_ft
@@ -15,12 +15,10 @@ class UserProfile:  # stores a user's personal information for calorie calculati
     def get_kg_weight(self):
         return self.weight_lb * 0.45359237
 
-    def calculate_bmr(self):
+    def calculate_bmr(self): #BMR: the number of calories you burn in a day at rest without the input of exercise 
         bmr = (10 * self.get_kg_weight()) + (6.25 * self.get_height_cm()) - (5 * self.age)
-        if self.gender.lower() == "male":
+        if self.sex.lower() == "male":
             return bmr + 5
         else:
             return bmr - 161
 
-user_profile = UserProfile(age=20, height_ft=5, height_in=10, gender="Male", weight_lb=170, activity_level=3)
-print(user_profile.calculate_bmr())
