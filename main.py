@@ -4,9 +4,11 @@ from user_profile import UserProfile
 log = DailyLog()
 
 def get_number(prompt):
+     #Validating the user input remained here rather than in one of the classes because checking what the user typed is part of the GUI
      continue_loop = True
      while continue_loop:
           try:
+               #the try and except blocks were needed because if the user inputted the wrong data type (ex: float("xyz")), it would crash the program
                value = float(input(prompt))
           except ValueError:
                print("Please input a number\n")
@@ -27,7 +29,7 @@ while user_continues:
      print("7. Reset")
      print("8. Quit\n")
 
-     choice = input("Choose an option: ")
+     choice = input("Choose an option: ") #kept a string instead of converting to an integer because strings can't crash, so a bad input simply falls through to the else branch 
      if choice == "1":
            eaten_input = get_number("Enter the number of calories you ate: ") 
            log.add_eaten(eaten_input)
@@ -38,7 +40,7 @@ while user_continues:
           goal_input = get_number("Enter your caloric goal: ")
           log.set_goal(goal_input)
      elif choice == "4":
-          if log.goal == 0:
+          if log.goal == 0: #without this check, an unset goal would make every user look over their goal when in reality they do not have one set, and the program would provide misleading information
                print("You have not set a goal yet.")
           else:
                net_calories = log.get_net_calories()
@@ -49,6 +51,7 @@ while user_continues:
                else:
                     print(f"You did not meet your goal. You are {-1*difference:.0f} calories over your {log.goal:.0f} calorie goal.") 
      elif choice == "5":
+          #Option 4 provided a quick check whether the user was over or under the goal, whereas this option provides an entire breakdown 
           net_calories = log.get_net_calories()
           difference = log.goal_check()
           print("\n--- Daily Summary ---")
@@ -64,6 +67,8 @@ while user_continues:
                else:
                     print(f"Status: You are {-1*difference:.0f} calories over your goal")
      elif choice == "6":
+          #Each user has their profile rebuilt on every run instead of being saved elsewhere
+          #Having a saved history feature is in the Eisenhower Matrix, however, it was left out on this branch to focus on the calorie calculator 
           age = get_number("Enter your age in years: ")
           height_ft = get_number("Enter your height (feet): ")
           height_in = get_number("Enter your height (remaining in inches): ")
@@ -73,6 +78,7 @@ while user_continues:
           weight_lb = get_number("Enter your weight in pounds: ")
           
           sex = input("Enter your sex (male/female): ").strip().lower()
+          #Originally had an "or" statement, but every input would statfie one side so I changed it to "and" because nothign would equal both male and female
           while sex != "male" and sex != "female":
                print("Please enter male or female")
                sex = input("Enter your sex (male/female):  ").strip().lower()
@@ -83,7 +89,7 @@ while user_continues:
           print("3. Moderately active (3-5 days/week)")
           print("4. Very active (6-7 days/week)")
           print("5. Extremely active (physical job + training)")
-          activity = int(get_number("Enter your activity level (1-5): "))
+          activity = int(get_number("Enter your activity level (1-5): ")) #an integer because the mutiplier dictionary keys are whole numbers; without this type conversion, a float or any other type would raise a KeyError
           while activity < 1 or activity > 5:
                activity = int(get_number("Enter your activity level (1-5): "))
 
@@ -99,6 +105,7 @@ while user_continues:
           print(f"Recommended Daily Goal: {recommend:.0f} calories")
           print("Note: these are estimates, not medical advice.")
 
+          #the recommendation is offered to be set as the user's goal but not applied automatically; asks the user whether they want this value outputted to be set as their daily goal or not 
           use_goal = input("\nWould you like to use this recommendation as your daily goal? (Y/N): ").strip().lower()
           if use_goal == "y":
                log.set_goal(recommend)
@@ -107,6 +114,7 @@ while user_continues:
                print("Goal not changed")
 
      elif choice == "7":
+          #Confirmation guard if the user accidentally inputted 7 and wipes the whole day's data
           confirm = input("Are you sure you want to reset all values? (Y/N): ")
           if confirm.lower() == "y":
                log.reset()
