@@ -4,7 +4,7 @@ from user_profile import UserProfile
 log = DailyLog()
 
 def get_number(prompt):
-     #Validating the user input remained here rather than in one of the classes because checking what the user typed is part of the GUI
+     #Validating the user input remained here rather than in one of the classes because checking what the user typed is the job of the menu code, not the classes that store and calculate data
      continue_loop = True
      while continue_loop:
           try:
@@ -51,7 +51,7 @@ while user_continues:
                else:
                     print(f"You did not meet your goal. You are {-1*difference:.0f} calories over your {log.goal:.0f} calorie goal.") 
      elif choice == "5":
-          #Option 4 provided a quick check whether the user was over or under the goal, whereas this option provides an entire breakdown 
+          #Option 4 provides a quick check whether the user was over or under the goal, whereas this option provides an entire breakdown 
           net_calories = log.get_net_calories()
           difference = log.goal_check()
           print("\n--- Daily Summary ---")
@@ -78,7 +78,7 @@ while user_continues:
           weight_lb = get_number("Enter your weight in pounds: ")
           
           sex = input("Enter your sex (male/female): ").strip().lower()
-          #Originally had an "or" statement, but every input would statfie one side so I changed it to "and" because nothign would equal both male and female
+          #Originally had an "or" statement, but every input would satisfy one side so I changed it to "and" because nothing would equal both male and female
           while sex != "male" and sex != "female":
                print("Please enter male or female")
                sex = input("Enter your sex (male/female):  ").strip().lower()
@@ -89,7 +89,7 @@ while user_continues:
           print("3. Moderately active (3-5 days/week)")
           print("4. Very active (6-7 days/week)")
           print("5. Extremely active (physical job + training)")
-          activity = int(get_number("Enter your activity level (1-5): ")) #an integer because the mutiplier dictionary keys are whole numbers; without this type conversion, a float or any other type would raise a KeyError
+          activity = int(get_number("Enter your activity level (1-5): ")) #an integer because the multiplier dictionary keys are whole numbers; without this type conversion, a float or any other primitive type would raise a KeyError
           while activity < 1 or activity > 5:
                activity = int(get_number("Enter your activity level (1-5): "))
 
@@ -114,7 +114,7 @@ while user_continues:
                print("Goal not changed")
 
      elif choice == "7":
-          #Confirmation guard if the user accidentally inputted 7 and wipes the whole day's data
+          #Confirmation guard if the user accidentally inputted 7 and wiped the whole day's data
           confirm = input("Are you sure you want to reset all values? (Y/N): ")
           if confirm.lower() == "y":
                log.reset()

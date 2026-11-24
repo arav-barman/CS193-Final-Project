@@ -1,6 +1,6 @@
 class DailyLog: 
     #this class only stores and calculates; it never prints or asks for an input
-    #to add a GUI, keeping the interactiveness part of the prgogram in main.py means a future Tkinter GUI can reuse this class unchanged
+    #to add a GUI, keeping the interactiveness part of the program in main.py means a future Tkinter GUI can reuse this class unchanged
     def __init__(self): 
         self.calories_eaten = 0 
         self.calories_burned = 0 
@@ -13,6 +13,7 @@ class DailyLog:
         self.calories_burned += burned
 
     def set_goal(self, goal: float):
+        #calories accumulate during the day but a new goal replaces the old one
         #originally had += but changed it to = because a goal stays constant and doesn't accumulate; only changes if the user wants a different goal 
         self.goal = goal 
 
@@ -21,7 +22,7 @@ class DailyLog:
         return net_calories
     
     def goal_check(self):
-        #returns a signed number instead of message
+        #returns a signed number instead of a message
         #positive means under the goal, while negative means over the goal
         return self.goal - self.get_net_calories()
 
