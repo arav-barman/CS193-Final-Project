@@ -163,7 +163,7 @@ Planned features ("Schedule" quadrant of my Eisenhower Matrix):
 
 ## Demo
 
-[Video walkthrough](PASTE-YOUR-VIDEO-LINK-HERE)
+[Video walkthrough](https://youtu.be/iku-FhbZYos)
 
 ## Author
 

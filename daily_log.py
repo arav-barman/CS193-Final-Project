@@ -1,6 +1,6 @@
 class DailyLog: 
     #this class only stores and calculates; it never prints or asks for an input
-    #to add a GUI, keeping the interactiveness part of the program in main.py means a future Tkinter GUI can reuse this class unchanged
+    #to add a GUI, keeping the interactive part of the program in main.py means a future Tkinter GUI can reuse this class unchanged
     def __init__(self): 
         self.calories_eaten = 0 
         self.calories_burned = 0 
